@@ -15,7 +15,8 @@ Added :
   - Static server (for cookie free domaine)
   - Gzip compression
 
-
+# Main source
+https://github.com/PrestaShop/PrestaShop/blob/1.7.4.x/docs/server_config/nginx.conf.dist
 
 # Nginx sources from
 https://www.howtoforge.com/tutorial/how-to-install-nginx-with-php-and-mysql-lemp-on-debian-9/
@@ -30,3 +31,4 @@ https://medium.com/@jgefroh/a-guide-to-using-nginx-for-static-websites-d96a9d034
 # Opchace sources from
 https://gist.github.com/yugenekr/8e1885887d10b0d9ddc92beca9a52d93
 https://www.scalingphpbook.com/blog/2014/02/14/best-zend-opcache-settings.html
+https://commaster.net/content/installing-php-fastcgi-and-zend-opcache-wampserver
