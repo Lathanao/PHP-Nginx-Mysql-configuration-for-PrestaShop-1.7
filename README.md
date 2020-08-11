@@ -1,4 +1,4 @@
-# PHP, FPM, Nginx, Mysql 8 files configurations for PrestaShop 1.7
+# PHP, Nginx, Mysql configurations for PrestaShop 1.7
 
 **PHP, Nginx, Mysql 8** Files configurations for PrestaShop 1.7.
 Just need to copy past files or make some sim links.
@@ -7,7 +7,7 @@ Php and FPM configuration is really light.
 
 Finally, it just works well enough for me.
 
-## Conf file directories tree
+## Directories tree
 Most of the setup could be ajust again follow the machine you have. 
 Just test before then adapt with your own setting. 
 
@@ -49,3 +49,7 @@ Just test before then adapt with your own setting.
   
 - **SSL sources**:
   - https://medium.com/@jgefroh/a-guide-to-using-nginx-for-static-websites-d96a9d034940
+
+
+
+
