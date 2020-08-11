@@ -1,0 +1,182 @@
+# Copyright (c) 2016, Oracle and/or its affiliates. All rights reserved.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License, version 2.0,
+# as published by the Free Software Foundation.
+#
+# This program is also distributed with certain software (including
+# but not limited to OpenSSL) that is licensed under separate terms,
+# as designated in a particular file or component or in included license
+# documentation.  The authors of MySQL hereby grant you an additional
+# permission to link the program and your derivative works with the
+# separately licensed software that they have included with MySQL.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License, version 2.0, for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mysql.conf.d/
+
+
+[mysqld_safe]
+syslog
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet	= 16M
+
+
+[mysqld]
+### MyISAM #
+key_buffer_size = 256M # keep it low if no myisam data
+myisam-recover-options = FORCE,BACKUP
+
+### Pr
+#skip-grant-tables
+low-priority-updates = on
+
+### LOGGING
+log_error = /var/log/mysql/mysql_error.log
+log_queries_not_using_indexes = 1
+log_slow_admin_statements = 1
+slow_query_log = 1
+long_query_time = 0.01
+slow_query_log_file = /var/log/mysql-slow.log
+
+#log_output = /var/log/mysql_all_queries.log
+general_log = on
+general_log_file=/var/log/mysql/mysql_all_queries.log
+
+### BINARY LOGGING
+skip-log-bin
+#log_bin = /var/lib//mysql-bin.log
+#expire_logs_days = 14
+#sync_binlog = 1
+
+
+
+#--skip-innodb-adaptive-hash-index
+#innodb_adaptive_hash_index
+skip_innodb_adaptive_hash_index
+
+
+### SAFETY #
+innodb = force
+max_allowed_packet = 250M
+max_connect_errors = 100000
+
+### UNSAFETY #
+binlog_cache_size = 1M
+early-plugin-load=""
+
+bulk_insert_buffer_size = 64M
+transaction_isolation = READ-COMMITTED
+net_buffer_length = 8K
+read_buffer_size = 2M
+read_rnd_buffer_size = 16M
+myisam_sort_buffer_size = 32M
+
+### CACHE #
+### TESTING WITH DEFAUL : NO REALLY DIFFERENT #
+sort_buffer_size = 2M
+#write_buffer_size = 2M #Doesn't work there
+read_buffer_size = 1M
+read_rnd_buffer_size = 1M
+join_buffer_size = 1M
+
+skip-federated
+skip-slave-start
+query_alloc_block_size = 16K
+bind-address = 127.0.0.1
+skip-ssl
+
+
+#-------------------------------------------
+
+### Magento advise 16mb
+##  https://devdocs.magento.com/guides/v2.3/performance-best-practices/advanced-setup.html
+##
+##############################################################################################
+tmp_table_size = 64M
+max_heap_table_size = 64M
+max_connections = 100
+
+open_files_limit = 65535
+
+# 1000 -> You should probably increase your table_cache
+table_definition_cache = 2000
+
+# 256 -> You should probably increase your table_cache
+table_open_cache = 1000
+
+query_cache_size = 128M   // 64M  -> 95022 queries have been removed from the query cache due to lack of memory, Perhaps you should raise query_cache_size
+query_cache_type = ON
+query_cache_limit = 2M
+query_cache_min_res_unit=32
+
+#thread_pool_size = 16 #Default 16
+#thread_cache_size = -1 #Default -1
+#thread_stack = 192M #Default 256M
+
+
+innodb_lock_wait_timeout = 30
+#innodb_flush_method = O_DIRECT
+innodb_flush_log_at_trx_commit = 0
+innodb_log_files_in_group = 2
+innodb_log_file_size = 768M
+innodb_log_buffer_size = 16M
+innodb_file_per_table = 1
+innodb_buffer_pool_instances = 4
+innodb_buffer_pool_size = 6000M
+
+innodb_open_files=2000
+innodb_commit_concurrency=0
+
+
+#-------------------------------------------
+
+# Control the maximum size for the ibtmp1 file
+innodb_temp_data_file_path     = ibtmp1:64M:autoextend:max:20G
+innodb_thread_concurrency = 0
+innodb_read_io_threads = 64
+innodb_write_io_threads = 64
+innodb_use_native_aio=1
+
+innodb_checksums=ON #Default is CRC32 in 5.7, very fast
+innodb_checksum_algorithm=crc32
+innodb_doublewrite= 1 #https://www.percona.com/blog/2016/05/09/percona-server-5-7-parallel-doublewrite/
+innodb_stats_persistent = 1
+innodb_support_xa=0 #(We are read-only, but this option is deprecated)
+innodb_spin_wait_delay=6 #(Processor and OS-dependent)
+
+
+innodb_max_dirty_pages_pct=90 # from 75
+innodb_max_dirty_pages_pct_lwm=0 # from 0
+
+
+
+# perf special
+innodb_io_capacity=2000
+innodb_io_capacity_max=4000
+innodb_max_purge_lag_delay=30000000
+innodb_max_purge_lag=0
+innodb_adaptive_hash_index=0
+
+innodb_page_cleaners=4
+innodb_adaptive_flushing = 1
+innodb_flush_method=O_DIRECT_NO_FSYNC
+
+
+
+innodb_lru_scan_depth=256  # from 1024 to conserve CPU time every second
+innodb_flush_neighbors=0  # from ON to conserve CPU SSD has no rotational delay
+innodb_purge_threads=4  # from 1 to expedite purge activity
+innodb_flushing_avg_loops=10  # from 30 to reduce loop delays
+max_write_lock_count=16
