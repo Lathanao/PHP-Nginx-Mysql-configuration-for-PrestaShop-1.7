@@ -36,7 +36,8 @@ Just test before then adapt with your own setting.
   - https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms
   - https://www.nginx.com/resources/wiki/start/topics/examples/full/
   - https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
-
+  - https://geekflare.com/http-header-implementation/
+  
 - **Nginx resources**:
   - https://www.howtoforge.com/tutorial/how-to-install-nginx-with-php-and-mysql-lemp-on-debian-9/
   - https://www.digitalocean.com/community/questions/how-to-set-up-nginx-cookie-free-headers
@@ -44,7 +45,8 @@ Just test before then adapt with your own setting.
   - https://www.prestashop.com/forums/topic/519123-config-prestashop-17-and-nginx/
   - https://gist.github.com/prestarocket/5280139/1fcb2ee08012631b1aaa9d70c254e597d1d38196
   - https://github.com/PrestaShop/PrestaShop/blob/develop/docs/server_config/nginx.conf.dist
-
+  - https://docs.nextcloud.com/server/13.0.0/admin_manual/installation/nginx.html
+  
 - **Opcache resources**:
   - https://gist.github.com/yugenekr/8e1885887d10b0d9ddc92beca9a52d93
   - https://www.scalingphpbook.com/blog/2014/02/14/best-zend-opcache-settings.html
